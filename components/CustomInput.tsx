@@ -11,7 +11,6 @@ interface CustomInput {
   name: FieldPath<z.infer<typeof authFormSchema>>,
   label: string,
   placeholder: string,
-  type: string
 }
 
 const CustomInput = ({ control, name, label, placeholder }: CustomInput) => {
