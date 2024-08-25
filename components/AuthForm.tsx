@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import CustomInput from './CustomInput'
+import CountrySelect from './CountrySelect'
 import { authFormSchema } from '@/lib/utils'
 import { Loader2 } from 'lucide-react'
 
@@ -33,6 +34,9 @@ const AuthForm = ({ type }: { type: string }) => {
 		defaultValues: {
 			email: '',
 			password: '',
+			firstName: '',
+			lastName: '',
+			country: ''
 		},
 	})
 
@@ -90,6 +94,12 @@ const AuthForm = ({ type }: { type: string }) => {
 										label='Last Name'
 										placeholder='Enter your Last Name'
 									/>
+									<CountrySelect
+										control={form.control}
+										name='country'
+										label='Select country'
+										placeholder='Enter your country'
+									/>
 								</>
 							)}
 							<CustomInput
@@ -105,6 +115,7 @@ const AuthForm = ({ type }: { type: string }) => {
 								label='Password'
 								placeholder='Enter your assword'
 							/>
+
 							<div className='flex flex-col gap-4'>
 								<Button type='submit' className='form-btn' disabled={isLoading}>
 									{isLoading ? (
