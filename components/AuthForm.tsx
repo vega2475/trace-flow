@@ -23,30 +23,52 @@ import CustomInput from './CustomInput'
 import CountrySelect from './CountrySelect'
 import { authFormSchema } from '@/lib/utils'
 import { Loader2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 const AuthForm = ({ type }: { type: string }) => {
 	const [user, setUser] = useState(null)
 	const [isLoading, setIsLoading] = useState(false)
 
+  const formSchema = authFormSchema(type)
+
+  const router = useRouter()
+
 	// 1. Define your form.
-	const form = useForm<z.infer<typeof authFormSchema>>({
-		resolver: zodResolver(authFormSchema),
+	const form = useForm<z.infer<typeof formSchema>>({
+		resolver: zodResolver(formSchema),
 		defaultValues: {
 			email: '',
 			password: '',
-			firstName: '',
-			lastName: '',
-			country: ''
 		},
 	})
 
 	// 2. Define a submit handler.
-	function onSubmit(values: z.infer<typeof authFormSchema>) {
-		// Do something with the form values.
-		// ✅ This will be type-safe and validated.
+	const onSubmit = async (data: z.infer<typeof formSchema>) => {
 		setIsLoading(true)
-		console.log(values)
-		setIsLoading(false)
+    try{
+      if(type === 'sign-up'){
+        //TODO
+        // const newUser = await signUp(data)
+
+        // setUser(newUser)
+      }
+
+      if(type === 'sign-in'){
+        //TODO
+
+        // const response = await signIn({
+        //   email: data.email,
+        //   password: data.password
+        // })
+        // if(response){
+        //   router.push('/')
+        }
+      }
+    catch(error){
+      console.log(error)
+    } finally{
+      setIsLoading(false)
+    }
 	}
 
 	return (

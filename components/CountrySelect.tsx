@@ -23,11 +23,14 @@ import {
 	FormMessage,
 } from '@/components/ui/form'
 import { authFormSchema, cn } from '@/lib/utils'
-import countries from '../public/countries.json' // Импорт данных о странах
+import countries from '../public/countries.json' 
+
+const formSchema = authFormSchema('sign-up')
+
 
 interface CountrySelect {
-	control: Control<z.infer<typeof authFormSchema>>
-	name: FieldPath<z.infer<typeof authFormSchema>>
+	control: Control<z.infer<typeof formSchema>>
+	name: FieldPath<z.infer<typeof formSchema>>
 	label: string
 	placeholder: string
 }
